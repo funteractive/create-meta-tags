@@ -11,3 +11,19 @@
  *
  * @package         WPMetaTags
  */
+
+if (!defined('ABSPATH'))
+  exit();
+
+define('WP_META_TAGS_PLUGIN_PATH', plugin_dir_path(__FILE__));
+define('WP_META_TAGS_PLUGIN_URL', plugin_dir_url(__FILE__));
+
+require_once plugin_dir_path(__FILE__) . 'WPMetaTags/AutoLoader.php';
+$auto_loader = new WPMetaTags\AutoLoader();
+$auto_loader->registerDir(dirname(__FILE__) . '/wp-actions');
+$auto_loader->registerDir(dirname(__FILE__) . '/controllers');
+$auto_loader->registerDir(dirname(__FILE__) . '/models');
+$auto_loader->register();
+
+$actions = new WPMetaTags\WPActions();
+$actions->init();
