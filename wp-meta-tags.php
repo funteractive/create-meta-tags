@@ -1,5 +1,4 @@
 <?php
-
 /**
 Plugin Name: WP Meta Tags
 Version: 0.1.0
