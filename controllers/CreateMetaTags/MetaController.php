@@ -1,9 +1,9 @@
 <?php
-namespace WPMetaTags;
+namespace CreateMetaTags;
 
 /**
  * Class MetaController
- * @package WPMetaTags
+ * @package CreateMetaTags
  */
 class MetaController
 {

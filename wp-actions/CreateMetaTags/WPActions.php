@@ -1,5 +1,5 @@
 <?php
-namespace WPMetaTags;
+namespace CreateMetaTags;
 
 class WPActions
 {

@@ -1,9 +1,9 @@
 <?php
-namespace WPMetaTags;
+namespace CreateMetaTags;
 
 /**
  * Class MetaModel
- * @package WPMetaTags
+ * @package CreateMetaTags
  */
 class MetaModel
 {
