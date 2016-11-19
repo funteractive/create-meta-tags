@@ -1,5 +1,5 @@
 <?php
-namespace MWPCategories;
+namespace WPMetaTags;
 
 class AutoLoader
 {
