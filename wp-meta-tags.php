@@ -1,5 +1,6 @@
 <?php
-/*
+
+/**
 Plugin Name: WP Meta Tags
 Version: 0.1.0
 Description: Output meta description, keywords, opg, twitter cards on your site.
