@@ -50,18 +50,12 @@ class MetaController
    */
   public function ogp() {
     $post_id = null;
-    $feature_id = null;
     if(is_single()) {
       global $post;
       $post_id = $post->ID;
-    } elseif (is_tax('features')) {
-      $feature = get_queried_object();
-      if($feature) {
-        $feature_id = $feature->term_id;
-      }
     }
-    $data = $this->meta_model->find_ogp_data($post_id, $feature_id);
-    $output = '<meta property="fb:app_id" content="' . LIBZLIFE_FB_APP_ID . '" />' . "\n";
+    $data = $this->meta_model->find_ogp_data($post_id);
+    $output = '<meta property="fb:app_id" content="" />' . "\n";
     foreach($data as $key => $value) {
       $output .= sprintf(
         '<meta property="og:%s" content="%s" />' . "\n",
@@ -82,7 +76,7 @@ class MetaController
       global $post;
       $post_id = $post->ID;
     }
-    $data = $this->meta_model->find_twitter_card_data($post_id, $feature_id);
+    $data = $this->meta_model->find_twitter_card_data($post_id);
     $output = '';
     foreach($data as $key => $value) {
       $output .= sprintf(
