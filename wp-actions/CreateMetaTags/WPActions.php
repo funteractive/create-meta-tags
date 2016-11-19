@@ -4,15 +4,19 @@ namespace CreateMetaTags;
 class WPActions
 {
   protected $meta_controller;
+  protected $admin_controller;
 
   public function __construct() {
     $this->meta_controller = new MetaController();
+    $this->admin_controller = new AdminController();
   }
 
   public function init() {
     add_action('wp_head', [$this, 'output_site_meta']);
     add_action('wp_head', [$this, 'output_ogp']);
     add_action('wp_head', [$this, 'output_twitter_card']);
+
+    add_action('admin_menu',[$this->admin_controller, 'admin_menu']);
   }
 
   /**

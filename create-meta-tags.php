@@ -15,8 +15,8 @@
 if (!defined('ABSPATH'))
   exit();
 
-define('WP_META_TAGS_PLUGIN_PATH', plugin_dir_path(__FILE__));
-define('WP_META_TAGS_PLUGIN_URL', plugin_dir_url(__FILE__));
+define('CREATE_META_TAGS_PLUGIN_PATH', plugin_dir_path(__FILE__));
+define('CREATE_META_TAGS_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 require_once plugin_dir_path(__FILE__) . 'CreateMetaTags/AutoLoader.php';
 $auto_loader = new CreateMetaTags\AutoLoader();
