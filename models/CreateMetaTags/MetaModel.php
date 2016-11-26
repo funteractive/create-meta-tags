@@ -17,21 +17,6 @@ class MetaModel
    * @param null $post_id
    * @return array
    */
-  public function find_share_data($post_id = null) {
-    $share_data = [
-      'title'       => $this->get_title(),
-      'description' => $this->get_description($post_id),
-      'url'         => $this->get_url(),
-      'image'       => $this->get_image($post_id),
-    ];
-
-    return $share_data;
-  }
-
-  /**
-   * @param null $post_id
-   * @return array
-   */
   public function find_site_meta($post_id = null) {
     $site_meta_data = [
       'keywords'    => $this->get_keywords($post_id),
