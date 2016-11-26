@@ -21,7 +21,7 @@ class AdminController
 
   public function admin_settings() {
     register_setting(CREATE_META_TAGS_TEXT_DOMAIN, 'create_meta_tags_keywords');
-    register_setting(CREATE_META_TAGS_TEXT_DOMAIN, 'create_meta_tags_use_blogdescription');
+    register_setting(CREATE_META_TAGS_TEXT_DOMAIN, 'create_meta_tags_use_tag_line');
     register_setting(CREATE_META_TAGS_TEXT_DOMAIN, 'create_meta_tags_description');
     register_setting(CREATE_META_TAGS_TEXT_DOMAIN, 'create_meta_tags_image');
   }
@@ -34,7 +34,12 @@ class AdminController
   }
 
   public function admin_scripts() {
-
+    $screen = get_current_screen();
+    if($screen->base === 'settings_page_create-meta-tags') {
+      wp_enqueue_media();
+      wp_enqueue_script('vue', CREATE_META_TAGS_PLUGIN_URL . 'assets/vendor/js/vue.js');
+      wp_enqueue_script('create_meta_tags_admin', CREATE_META_TAGS_PLUGIN_URL . 'assets/js/admin.js', false, false, true);
+    }
   }
 
   private function render($file_path) {

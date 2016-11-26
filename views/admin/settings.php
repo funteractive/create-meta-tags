@@ -1,6 +1,6 @@
 <div class="wrap">
-  <h1><?php echo _('メタタグ設定'); ?></h1>
-  <h2><?php echo _('デフォルト設定'); ?></h2>
+  <h1><?php echo _('Create Meta Tags Settings'); ?></h1>
+  <h2><?php echo _('General Settings'); ?></h2>
   <div class="wrap-inner">
     <form action="options.php" method="post">
       <?php settings_fields(CREATE_META_TAGS_TEXT_DOMAIN); ?>
@@ -8,7 +8,7 @@
         <tbody>
         <tr>
           <th>
-            <?php echo _('keywords'); ?>
+            <?php echo _('Keywords'); ?>
           </th>
           <td>
             <textarea name="create_meta_tags_keywords" cols="30" rows="3"><?php echo get_option('create_meta_tags_keywords'); ?></textarea>
@@ -17,13 +17,13 @@
         </tr>
         <tr>
           <th>
-            <?php echo _('description'); ?>
+            <?php echo _('Description'); ?>
           </th>
           <td>
             <fieldset>
-              <label for="create_meta_tags_use_blogdescription">
-                <input type="checkbox" name="create_meta_tags_use_blogdescription[]" id="create_meta_tags_use_blogdescription" value="1"<?php if(get_option('create_meta_tags_use_blogdescription')) echo ' checked'; ?>>
-                <?php echo _('キャッチフレーズを使う'); ?>
+              <label for="create_meta_tags_use_tag_line">
+                <input type="checkbox" name="create_meta_tags_use_tag_line[]" id="create_meta_tags_use_tag_line" value="1"<?php if(get_option('create_meta_tags_use_tag_line')) echo ' checked'; ?>>
+                <?php echo _('Use Tagline'); ?>
               </label>
             </fieldset>
             <textarea name="create_meta_tags_description" cols="30" rows="3"><?php echo get_option('create_meta_tags_description'); ?></textarea>
@@ -32,13 +32,13 @@
         </tr>
         <tr>
           <th>
-            <?php echo _('image'); ?>
+            <?php echo _('Image'); ?>
           </th>
-          <td>
-            <div class="placeholder">画像未設定</div>
+          <td class="js-cmt-uploader">
+            <div class="placeholder js-cmt-placeholder">画像未設定</div>
             <input type="hidden" name="create_meta_tags_image" value="<?php echo get_option('create_meta_tags_image'); ?>">
             <p class="inner" style="text-align: right;">
-              <button type="button" class="button new" id="header_image-button">新規画像を追加</button>
+              <button type="button" class="button new js-cmt-upload-button" id="header_image-button">新規画像を追加</button>
             </p>
             <p class="description"><?php echo _('og:image, twitter:imageのデフォルト値に使われます。'); ?></p>
           </td>
