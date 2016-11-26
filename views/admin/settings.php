@@ -2,7 +2,7 @@
   <h1><?php echo _('Create Meta Tags Settings'); ?></h1>
   <h2><?php echo _('General Settings'); ?></h2>
   <div class="wrap-inner">
-    <form action="options.php" method="post">
+    <form action="options.php" method="post" id="js-cmt-settings">
       <?php settings_fields(CREATE_META_TAGS_TEXT_DOMAIN); ?>
       <table class="form-table">
         <tbody>
@@ -38,7 +38,7 @@
             <div class="placeholder js-cmt-placeholder">画像未設定</div>
             <input type="hidden" name="create_meta_tags_image" value="<?php echo get_option('create_meta_tags_image'); ?>">
             <p class="inner" style="text-align: right;">
-              <button type="button" class="button new js-cmt-upload-button" id="header_image-button">新規画像を追加</button>
+              <button type="button" class="button new" id="header_image-button" v-on:click="openMedia">新規画像を追加</button>
             </p>
             <p class="description"><?php echo _('og:image, twitter:imageのデフォルト値に使われます。'); ?></p>
           </td>
