@@ -19,6 +19,13 @@ class AdminController
     $this->render('admin/settings.php');
   }
 
+  public function admin_settings() {
+    register_setting(CREATE_META_TAGS_TEXT_DOMAIN, 'create_meta_tags_keywords');
+    register_setting(CREATE_META_TAGS_TEXT_DOMAIN, 'create_meta_tags_use_blogdescription');
+    register_setting(CREATE_META_TAGS_TEXT_DOMAIN, 'create_meta_tags_description');
+    register_setting(CREATE_META_TAGS_TEXT_DOMAIN, 'create_meta_tags_image');
+  }
+
   public function admin_css() {
     $screen = get_current_screen();
     if($screen->base === 'settings_page_create-meta-tags') {

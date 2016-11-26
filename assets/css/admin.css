@@ -1,14 +1,14 @@
 @charset "UTF-8";
 
-body.settings_page_create-meta-tags .wrap-inner {
-  width: 710px;
+body.settings_page_create-meta-tags .inner {
+  width: 500px;
 }
 body.settings_page_create-meta-tags textarea {
-  width: 100%;
+  width: 500px;
   margin-bottom: 6px;
 }
 body.settings_page_create-meta-tags .placeholder {
-  width: 100%;
+  width: 500px;
   position: relative;
   text-align: center;
   cursor: default;

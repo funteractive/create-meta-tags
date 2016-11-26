@@ -17,6 +17,7 @@ class WPActions
     add_action('wp_head', [$this, 'output_twitter_card']);
 
     add_action('admin_menu',[$this->admin_controller, 'admin_menu']);
+    add_action('admin_init',[$this->admin_controller, 'admin_settings']);
     add_action('admin_print_styles', [$this->admin_controller, 'admin_css']);
     add_action('admin_enqueue_scripts', [$this->admin_controller, 'admin_scripts']);
   }
