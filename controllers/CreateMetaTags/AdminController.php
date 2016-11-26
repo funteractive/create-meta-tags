@@ -19,6 +19,17 @@ class AdminController
     $this->render('admin/settings.php');
   }
 
+  public function admin_css() {
+    $screen = get_current_screen();
+    if($screen->base === 'settings_page_create-meta-tags') {
+      wp_enqueue_style('create_meta_tags_admin', CREATE_META_TAGS_PLUGIN_URL . 'assets/css/admin.css');
+    }
+  }
+
+  public function admin_scripts() {
+
+  }
+
   private function render($file_path) {
     $path = CREATE_META_TAGS_PLUGIN_PATH . self::VIEWS_ROOT_PATH . $file_path;
     if(file_exists($path)) {
