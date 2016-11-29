@@ -4,9 +4,10 @@
 
   CreateMetaTagsSettings.prototype.init = function() {
     var self = this;
+    var $imageHidden = $('#js-cmt-image-hidden');
     var useTagLine = $('#create_meta_tags_use_tag_line').prop('checked');
-    var imageId = 0;
-    var imageSrc = '';
+    var imageId = $imageHidden.data('id');
+    var imageSrc = $imageHidden.data('src');
 
     this.vue = new Vue({
       el: '#js-cmt-settings',
@@ -19,6 +20,11 @@
         openMedia: function(evt) {
           evt.preventDefault();
           self.uploader.open();
+        },
+        removeMedia: function(evt) {
+          evt.preventDefault();
+          Vue.set(self.vue, 'imageId', 0);
+          Vue.set(self.vue, 'imageSrc', '');
         }
       }
     });
@@ -40,8 +46,8 @@
       var images = self.uploader.state().get('selection');
       if(images) {
         images.each(function(file) {
-          self.vue.$set('imageId', file.id);
-          // apiを叩いて画像srcを取得
+          Vue.set(self.vue, 'imageId', file.id);
+          Vue.set(self.vue, 'imageSrc', file.attributes.url);
         });
       }
     });

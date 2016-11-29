@@ -1,3 +1,12 @@
+<?php
+$image_id = get_option('create_meta_tags_image');
+if($image_id) {
+  $src = wp_get_attachment_image_src($image_id, 'full');
+  if($src) {
+    $image_src = current($src);
+  }
+}
+?>
 <div class="wrap">
   <h1><?php echo _('Create Meta Tags Settings'); ?></h1>
   <h2><?php echo _('General Settings'); ?></h2>
@@ -34,11 +43,17 @@
           <th>
             <?php echo _('Image'); ?>
           </th>
-          <td class="js-cmt-uploader">
-            <div class="placeholder js-cmt-placeholder">画像未設定</div>
-            <input type="hidden" name="create_meta_tags_image" value="<?php echo get_option('create_meta_tags_image'); ?>">
+          <td>
+            <div v-if="imageSrc" class="inner">
+              <img v-bind:src="imageSrc" alt="" style="max-width: 100%; height: auto;">
+            </div>
+            <div v-else class="placeholder">
+              <template>画像未設定</template>
+            </div>
+            <input type="hidden" name="create_meta_tags_image" id="js-cmt-image-hidden" data-id="<?php if($image_id) echo esc_html($image_id); ?>" data-src="<?php if(isset($image_src)) echo esc_url($image_src); ?>" :value="imageId">
             <p class="inner" style="text-align: right;">
-              <button type="button" class="button new" id="header_image-button" v-on:click="openMedia">新規画像を追加</button>
+              <button type="button" class="button" v-on:click="removeMedia" v-if="imageId">削除</button>
+              <button type="button" class="button" v-on:click="openMedia">画像を選択</button>
             </p>
             <p class="description"><?php echo _('og:image, twitter:imageのデフォルト値に使われます。'); ?></p>
           </td>
