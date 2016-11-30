@@ -37,7 +37,7 @@ class AdminController
     $screen = get_current_screen();
     if($screen->base === 'settings_page_create-meta-tags') {
       wp_enqueue_media();
-      wp_enqueue_script('vue', CREATE_META_TAGS_PLUGIN_URL . 'assets/vendor/js/vue.js');
+      wp_enqueue_script('vue', CREATE_META_TAGS_PLUGIN_URL . 'assets/vendor/js/vue.min.js');
       wp_enqueue_script('create_meta_tags_admin', CREATE_META_TAGS_PLUGIN_URL . 'assets/js/admin.js', false, false, true);
     }
   }
