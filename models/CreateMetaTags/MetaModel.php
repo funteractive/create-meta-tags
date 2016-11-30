@@ -72,8 +72,14 @@ class MetaModel
   private function get_image($post_id = null) {
     if($post_id && has_post_thumbnail($post_id)) {
       return get_the_post_thumbnail_url($post_id, 'full');
+    } elseif($image_id = get_option('create_meta_tags_image')) {
+      $src = wp_get_attachment_image_src($image_id, 'full');
+      if($src) {
+        return current($src);
+      }
+      return null;
     } else {
-      return home_url() . '/ogimg.png';
+      return null;
     }
   }
 
