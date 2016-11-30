@@ -1,13 +1,14 @@
 (function ($) {
   var CreateMetaTagsSettings = function() {
+    this.$settings = $('#js-cmt-settings');
   };
 
   CreateMetaTagsSettings.prototype.init = function() {
+    if(this.$settings.length <= 0) return false;
     var self = this;
-    var $imageHidden = $('#js-cmt-image-hidden');
-    var useTagLine = $('#create_meta_tags_use_tag_line').prop('checked');
-    var imageId = $imageHidden.data('id');
-    var imageSrc = $imageHidden.data('src');
+    var useTagLine = this.$settings.data('useTagLine');
+    var imageId = this.$settings.data('imageId');
+    var imageSrc = this.$settings.data('imageSrc');
 
     this.vue = new Vue({
       el: '#js-cmt-settings',

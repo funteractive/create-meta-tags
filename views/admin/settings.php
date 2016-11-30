@@ -1,4 +1,5 @@
 <?php
+$use_tag_line = get_option('create_meta_tags_use_tag_line') ? 1 : 0;
 $image_id = get_option('create_meta_tags_image');
 if($image_id) {
   $src = wp_get_attachment_image_src($image_id, 'full');
@@ -11,7 +12,7 @@ if($image_id) {
   <h1><?php echo _('Create Meta Tags Settings'); ?></h1>
   <h2><?php echo _('General Settings'); ?></h2>
   <div class="wrap-inner">
-    <form action="options.php" method="post" id="js-cmt-settings">
+    <form action="options.php" method="post" id="js-cmt-settings" data-use-tag-line="<?php echo $use_tag_line; ?>" data-image-id="<?php if($image_id) echo esc_html($image_id); ?>" data-image-src="<?php if(isset($image_src)) echo esc_url($image_src); ?>">
       <?php settings_fields(CREATE_META_TAGS_TEXT_DOMAIN); ?>
       <table class="form-table">
         <tbody>
@@ -31,11 +32,11 @@ if($image_id) {
           <td>
             <fieldset>
               <label for="create_meta_tags_use_tag_line">
-                <input type="checkbox" name="create_meta_tags_use_tag_line[]" id="create_meta_tags_use_tag_line" value="1"<?php if(get_option('create_meta_tags_use_tag_line')) echo ' checked'; ?>>
+                <input v-model="useTagLine" type="checkbox" name="create_meta_tags_use_tag_line[]" id="create_meta_tags_use_tag_line" value="1">
                 <?php echo _('Use Tagline'); ?>
               </label>
             </fieldset>
-            <textarea name="create_meta_tags_description" cols="30" rows="3"><?php echo get_option('create_meta_tags_description'); ?></textarea>
+            <textarea name="create_meta_tags_description" cols="30" rows="3" v-bind:disabled="useTagLine"><?php echo get_option('create_meta_tags_description'); ?></textarea>
             <p class="description"><?php echo _('meta description, og:description, twitter:descriptionのデフォルト値に使われます。'); ?></p>
           </td>
         </tr>
@@ -50,7 +51,7 @@ if($image_id) {
             <div v-else class="placeholder">
               <template>画像未設定</template>
             </div>
-            <input type="hidden" name="create_meta_tags_image" id="js-cmt-image-hidden" data-id="<?php if($image_id) echo esc_html($image_id); ?>" data-src="<?php if(isset($image_src)) echo esc_url($image_src); ?>" :value="imageId">
+            <input type="hidden" name="create_meta_tags_image" id="js-cmt-image-hidden" :value="imageId">
             <p class="inner" style="text-align: right;">
               <button type="button" class="button" v-on:click="removeMedia" v-if="imageId">削除</button>
               <button type="button" class="button" v-on:click="openMedia">画像を選択</button>
