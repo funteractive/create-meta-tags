@@ -20,6 +20,8 @@ class AdminController
   }
 
   public function admin_settings() {
+    register_setting(CREATE_META_TAGS_TEXT_DOMAIN, 'create_meta_tags_facebook_app_id');
+    register_setting(CREATE_META_TAGS_TEXT_DOMAIN, 'create_meta_tags_twitter_site');
     register_setting(CREATE_META_TAGS_TEXT_DOMAIN, 'create_meta_tags_keywords');
     register_setting(CREATE_META_TAGS_TEXT_DOMAIN, 'create_meta_tags_use_tag_line');
     register_setting(CREATE_META_TAGS_TEXT_DOMAIN, 'create_meta_tags_description');

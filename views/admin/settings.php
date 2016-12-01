@@ -12,10 +12,31 @@ if($image_id) {
   <h1><?php echo _('Create Meta Tags Settings'); ?></h1>
   <h2><?php echo _('General Settings'); ?></h2>
   <div class="wrap-inner">
-    <form action="options.php" method="post" id="js-cmt-settings" data-use-tag-line="<?php echo $use_tag_line; ?>" data-image-id="<?php if($image_id) echo esc_html($image_id); ?>" data-image-src="<?php if(isset($image_src)) echo esc_url($image_src); ?>">
+    <form action="options.php" method="post" id="js-cmt-settings" data-use-tagline="<?php echo $use_tag_line; ?>" data-image-id="<?php if($image_id) echo esc_html($image_id); ?>" data-image-src="<?php if(isset($image_src)) echo esc_url($image_src); ?>">
       <?php settings_fields(CREATE_META_TAGS_TEXT_DOMAIN); ?>
       <table class="form-table">
         <tbody>
+        <tr>
+          <th>
+            <?php echo _('Facebook App ID'); ?>
+          </th>
+          <td>
+            <input type="text" class="regular-text" name="create_meta_tags_facebook_app_id" value="<?php echo get_option('create_meta_tags_facebook_app_id'); ?>">
+            <p class="description"><?php echo _('入力が無いとOGPは表示されません。'); ?></p>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <?php echo _('Twitter Site'); ?>
+          </th>
+          <td>
+            <input type="text" class="regular-text" name="create_meta_tags_twitter_site" value="<?php echo get_option('create_meta_tags_twitter_site'); ?>">
+            <p class="description">
+              <?php echo _('入力が無いとTwitter Cardsは表示されません。'); ?><br>
+              <a href="https://dev.twitter.com/cards/getting-started#card-and-content-attribution" target="_blank"><?php echo _('twitter:siteの詳細を見る'); ?></a>
+            </p>
+          </td>
+        </tr>
         <tr>
           <th>
             <?php echo _('Keywords'); ?>

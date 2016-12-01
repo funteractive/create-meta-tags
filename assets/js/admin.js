@@ -6,7 +6,7 @@
   CreateMetaTagsSettings.prototype.init = function() {
     if(this.$settings.length <= 0) return false;
     var self = this;
-    var useTagLine = this.$settings.data('useTagLine');
+    var useTagLine = Boolean(this.$settings.data('useTagline'));
     var imageId = this.$settings.data('imageId');
     var imageSrc = this.$settings.data('imageSrc');
 
