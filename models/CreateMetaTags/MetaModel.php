@@ -8,25 +8,7 @@ namespace CreateMetaTags;
 class MetaModel
 {
   const OG_LOCALE = 'ja_JP';
-  const KEYWORDS  = 'キーワード';
-  const DESCRIPTION = 'サイトの説明';
   const TWITTER_CARD_TYPE = 'summary_large_image';
-  const TWITTER_SITE = '';
-
-  /**
-   * @param null $post_id
-   * @return array
-   */
-  public function find_share_data($post_id = null) {
-    $share_data = [
-      'title'       => $this->get_title(),
-      'description' => $this->get_description($post_id),
-      'url'         => $this->get_url(),
-      'image'       => $this->get_image($post_id),
-    ];
-
-    return $share_data;
-  }
 
   /**
    * @param null $post_id
@@ -43,38 +25,56 @@ class MetaModel
 
   /**
    * @param null $post_id
-   * @param null $feature_id
    * @return array
    */
-  public function find_ogp_data($post_id = null, $feature_id = null) {
-    $ogp_data = [
-      'title'       => $this->get_title(),
-      'image'       => $this->get_image($post_id, $feature_id),
-      'url'         => $this->get_url(),
-      'description' => $this->get_description($post_id),
-      'site_name'   => $this->get_site_name(),
-      'type'        => $this->get_type($post_id),
-      'locale'      => $this->get_locale(),
-    ];
+  public function find_ogp_data($post_id = null) {
+    $ogp_data = null;
+    if($this->get_fb_app_id()) {
+      $ogp_data = [
+        'title'       => $this->get_title(),
+        'image'       => $this->get_image($post_id),
+        'url'         => $this->get_url(),
+        'description' => $this->get_description($post_id),
+        'site_name'   => $this->get_site_name(),
+        'type'        => $this->get_type($post_id),
+        'locale'      => $this->get_locale(),
+      ];
+    }
 
     return $ogp_data;
   }
 
   /**
    * @param null $post_id
-   * @param null $feature_id
    * @return array
    */
-  public function find_twitter_card_data($post_id = null, $feature_id = null) {
-    $twitter_card_data = [
-      'card'        => $this->get_card(),
-      'site'        => $this->get_site(),
-      'title'       => $this->get_title(),
-      'image'       => $this->get_image($post_id, $feature_id),
-      'description' => $this->get_description($post_id),
-    ];
+  public function find_twitter_card_data($post_id = null) {
+    $twitter_card_data = null;
+    if($this->get_site()) {
+      $twitter_card_data = [
+        'card'        => $this->get_card(),
+        'site'        => $this->get_site(),
+        'title'       => $this->get_title(),
+        'image'       => $this->get_image($post_id),
+        'description' => $this->get_description($post_id),
+      ];
+    }
 
     return $twitter_card_data;
+  }
+
+  /**
+   * @return bool
+   */
+  public function is_show_ogp() {
+    return (bool) $this->get_fb_app_id();
+  }
+
+  /**
+   * @return bool
+   */
+  public function is_show_twitter_cards() {
+    return (bool) $this->get_site();
   }
 
   /**
@@ -91,8 +91,14 @@ class MetaModel
   private function get_image($post_id = null) {
     if($post_id && has_post_thumbnail($post_id)) {
       return get_the_post_thumbnail_url($post_id, 'full');
+    } elseif($image_id = get_option('create_meta_tags_image')) {
+      $src = wp_get_attachment_image_src($image_id, 'full');
+      if($src) {
+        return current($src);
+      }
+      return null;
     } else {
-      return home_url() . '/ogimg.png';
+      return null;
     }
   }
 
@@ -110,8 +116,10 @@ class MetaModel
   private function get_description($post_id = null) {
     if($post_id) {
       return strip_tags(get_the_excerpt($post_id));
+    } elseif(get_option('create_meta_tags_use_tag_line')) {
+      return get_bloginfo('description');
     } else {
-      return self::DESCRIPTION;
+      return get_option('create_meta_tags_description');
     }
   }
 
@@ -119,7 +127,7 @@ class MetaModel
    * @return string
    */
   private function get_keywords() {
-    return self::KEYWORDS;
+    return get_option('create_meta_tags_keywords');
   }
 
   /**
@@ -156,9 +164,16 @@ class MetaModel
   }
 
   /**
-   * @return string
+   * @return mixed|void
    */
   private function get_site() {
-    return self::TWITTER_SITE;
+    return get_option('create_meta_tags_twitter_site');
+  }
+
+  /**
+   * @return mixed|void
+   */
+  private function get_fb_app_id() {
+    return get_option('create_meta_tags_facebook_app_id');
   }
 }

@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+body.settings_page_create-meta-tags .inner {
+  width: 500px;
+}
+body.settings_page_create-meta-tags textarea {
+  width: 500px;
+  margin-bottom: 6px;
+}
+body.settings_page_create-meta-tags .placeholder {
+  width: 500px;
+  position: relative;
+  text-align: center;
+  cursor: default;
+  border: 1px dashed #b4b9be;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 9px 0;
+  line-height: 20px;
+  margin-bottom: 8px;
+}
