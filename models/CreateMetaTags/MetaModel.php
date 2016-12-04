@@ -28,18 +28,15 @@ class MetaModel
    * @return array
    */
   public function find_ogp_data($post_id = null) {
-    $ogp_data = null;
-    if($this->get_fb_app_id()) {
-      $ogp_data = [
-        'title'       => $this->get_title(),
-        'image'       => $this->get_image($post_id),
-        'url'         => $this->get_url(),
-        'description' => $this->get_description($post_id),
-        'site_name'   => $this->get_site_name(),
-        'type'        => $this->get_type($post_id),
-        'locale'      => $this->get_locale(),
-      ];
-    }
+    $ogp_data = [
+      'title'       => $this->get_title(),
+      'image'       => $this->get_image($post_id),
+      'url'         => $this->get_url(),
+      'description' => $this->get_description($post_id),
+      'site_name'   => $this->get_site_name(),
+      'type'        => $this->get_type($post_id),
+      'locale'      => $this->get_locale(),
+    ];
 
     return $ogp_data;
   }
@@ -49,18 +46,22 @@ class MetaModel
    * @return array
    */
   public function find_twitter_card_data($post_id = null) {
-    $twitter_card_data = null;
-    if($this->get_site()) {
-      $twitter_card_data = [
-        'card'        => $this->get_card(),
-        'site'        => $this->get_site(),
-        'title'       => $this->get_title(),
-        'image'       => $this->get_image($post_id),
-        'description' => $this->get_description($post_id),
-      ];
-    }
+    $twitter_card_data = [
+      'card'        => $this->get_card(),
+      'site'        => $this->get_site(),
+      'title'       => $this->get_title(),
+      'image'       => $this->get_image($post_id),
+      'description' => $this->get_description($post_id),
+    ];
 
     return $twitter_card_data;
+  }
+
+  /**
+   * @return mixed|void
+   */
+  public function get_fb_app_id() {
+    return get_option('create_meta_tags_facebook_app_id');
   }
 
   /**
@@ -168,12 +169,5 @@ class MetaModel
    */
   private function get_site() {
     return get_option('create_meta_tags_twitter_site');
-  }
-
-  /**
-   * @return mixed|void
-   */
-  private function get_fb_app_id() {
-    return get_option('create_meta_tags_facebook_app_id');
   }
 }

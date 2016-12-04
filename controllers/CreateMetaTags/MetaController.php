@@ -15,15 +15,6 @@ class MetaController
   }
 
   /**
-   * @param $post_id
-   * @return array
-   */
-  public function share($post_id) {
-    $data = $this->meta_model->find_share_data($post_id);
-    return $data;
-  }
-
-  /**
    * @return string
    */
   public function site_meta() {
@@ -56,7 +47,8 @@ class MetaController
       $post_id = $post->ID;
     }
     $data = $this->meta_model->find_ogp_data($post_id);
-    if($data && $fb_app_id = $this->meta_model->is_show_ogp()) {
+    if($data && $this->meta_model->is_show_ogp()) {
+      $fb_app_id = $this->meta_model->get_fb_app_id();
       $output = '<meta property="fb:app_id" content="' . esc_html($fb_app_id) . '" />' . "\n";
       foreach($data as $key => $value) {
         $output .= sprintf(
