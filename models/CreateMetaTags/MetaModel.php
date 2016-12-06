@@ -16,7 +16,7 @@ class MetaModel
    */
   public function find_site_meta($post_id = null) {
     $site_meta_data = [
-      'keywords'    => $this->get_keywords($post_id),
+      'keywords'    => $this->get_keywords(),
       'description' => $this->get_description($post_id),
     ];
 
