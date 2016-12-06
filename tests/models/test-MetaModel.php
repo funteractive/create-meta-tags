@@ -5,12 +5,13 @@ class Test_Models_MetaModel extends \WP_UnitTestCase
 {
   protected $meta_model;
 
-  const KEYWORDS         = 'foo,bar,baz';
-  const BLOG_DESCRIPTION = 'Just another WordPress site';
-  const DESCRIPTION      = 'Lorem ipsum dolor sit amet, vix viderer eripuit forensibus cu. Iusto nostrum at mea. Nec ne errem iisque maluisset. Prima nostrud ut usu. Id quo iisque nominati efficiantur.';
-  const POST_EXCERPT     = 'This is post excerpt.';
-  const FB_APP_ID        = 12345678;
-  const TWITTER_SITE     = '@example';
+  const KEYWORDS          = 'foo,bar,baz';
+  const BLOG_DESCRIPTION  = 'Just another WordPress site';
+  const DESCRIPTION       = 'Lorem ipsum dolor sit amet, vix viderer eripuit forensibus cu. Iusto nostrum at mea. Nec ne errem iisque maluisset. Prima nostrud ut usu. Id quo iisque nominati efficiantur.';
+  const POST_EXCERPT      = 'This is post excerpt.';
+  const FB_APP_ID         = 12345678;
+  const TWITTER_SITE      = '@example';
+  const TWITTER_CARD_TYPE = 'summary_large_image';
 
   public function setUp() {
     parent::setUp();
@@ -78,26 +79,28 @@ class Test_Models_MetaModel extends \WP_UnitTestCase
     ], $this->meta_model->find_ogp_data());
   }
 
-  public function test_find_ogp_data_for_single() {
-    $post = self::factory()->post->create_and_get([
-      'post_excerpt' => self::POST_EXCERPT
-    ]);
-    $attachment_id = $this->factory->attachment->create_object('image.jpg', $post->ID, [
+  /**
+   * find_twitter_card_data
+   */
+  public function test_find_twitter_card_data() {
+    $attachment_id = $this->factory->attachment->create_object('image.jpg', 0, [
       'post_mime_type' => 'image/jpeg',
       'post_type' => 'attachment'
     ]);
     $attachment_src = wp_get_attachment_image_src($attachment_id, 'full');
     $attachment_src = $attachment_src[0];
 
+    add_option('create_meta_tags_description', self::DESCRIPTION);
+    add_option('create_meta_tags_image', $attachment_id);
+    add_option('create_meta_tags_twitter_site', self::TWITTER_SITE);
+
     $this->assertequals([
-      'title'       => get_the_title($post->ID),
+      'card'        => self::TWITTER_CARD_TYPE,
+      'site'        => self::TWITTER_SITE,
+      'title'       => get_bloginfo('name'),
       'image'       => $attachment_src,
-      'url'         => get_permalink($post->ID),
-      'description' => self::POST_EXCERPT,
-      'site_name'   => get_bloginfo('name'),
-      'type'        => 'article',
-      'locale'      => 'ja_JP',
-    ], $this->meta_model->find_ogp_data($post->ID));
+      'description' => self::DESCRIPTION,
+    ], $this->meta_model->find_twitter_card_data());
   }
 
   /**
