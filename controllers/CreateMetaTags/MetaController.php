@@ -33,6 +33,7 @@ class MetaController
       );
     }
 
+    $output = apply_filters('create_meta_tags_site_meta_output', $output, $post_id);
     return $output;
   }
 
@@ -59,6 +60,7 @@ class MetaController
       }
     }
 
+    $output = apply_filters('create_meta_tags_ogp_output', $output, $post_id);
     return $output;
   }
 
@@ -83,6 +85,7 @@ class MetaController
       }
     }
 
+    $output = apply_filters('create_meta_tags_twitter_card_output', $output, $post_id);
     return $output;
   }
 }

@@ -75,7 +75,7 @@ class Test_Models_MetaModel extends \WP_UnitTestCase
       'description' => self::DESCRIPTION,
       'site_name'   => get_bloginfo('name'),
       'type'        => 'website',
-      'locale'      => 'ja_JP',
+      'locale'      => 'en_US',
     ], $this->meta_model->find_ogp_data());
   }
 

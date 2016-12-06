@@ -7,8 +7,8 @@ class AdminController
 
   public function admin_menu() {
     add_options_page(
-      _('Create Meta Tags'),
-      _('Create Meta Tags'),
+      __('Create Meta Tags', CREATE_META_TAGS_TEXT_DOMAIN),
+      __('Create Meta Tags', CREATE_META_TAGS_TEXT_DOMAIN),
       'manage_options',
       'create-meta-tags',
       [$this, 'admin_page']

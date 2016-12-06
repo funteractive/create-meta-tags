@@ -7,7 +7,7 @@ namespace CreateMetaTags;
  */
 class MetaModel
 {
-  const OG_LOCALE = 'ja_JP';
+  const OG_LOCALE = 'en_US';
   const TWITTER_CARD_TYPE = 'summary_large_image';
 
   /**
@@ -20,6 +20,7 @@ class MetaModel
       'description' => $this->get_description($post_id),
     ];
 
+    $site_meta_data = apply_filters('create_meta_tags_site_meta', $site_meta_data, $post_id);
     return $site_meta_data;
   }
 
@@ -38,6 +39,7 @@ class MetaModel
       'locale'      => $this->get_locale(),
     ];
 
+    $ogp_data = apply_filters('create_meta_tags_ogp', $ogp_data, $post_id);
     return $ogp_data;
   }
 
@@ -54,6 +56,7 @@ class MetaModel
       'description' => $this->get_description($post_id),
     ];
 
+    $twitter_card_data = apply_filters('create_meta_tags_twitter_card', $twitter_card_data, $post_id);
     return $twitter_card_data;
   }
 
