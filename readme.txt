@@ -7,11 +7,11 @@ Stable tag: 4.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Output meta description, keywords, opg, twitter cards on your site.
+Output meta description, keywords, ogp, twitter cards on your site.
 
 == Description ==
 
-Output meta description, keywords, opg, twitter cards on your site.
+Output meta description, keywords, ogp, twitter cards on your site.
 
 == Installation ==
 
@@ -24,6 +24,9 @@ Output meta description, keywords, opg, twitter cards on your site.
 1. The plugin's settings page (Settings > Create Meta Tags).
 
 == Changelog ==
+
+= 0.1.1 =
+* fix readme.
 
 = 0.1.0 =
 * alpha release.
