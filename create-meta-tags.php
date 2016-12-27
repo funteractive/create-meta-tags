@@ -7,7 +7,7 @@
  * Author URI:      https://funteractive.co.jp/
  * Text Domain:     create-meta-tags
  * Domain Path:     /languages
- * Version:         0.1.0
+ * Version:         0.1.1
  *
  * @package         CreateMetaTags
  */
